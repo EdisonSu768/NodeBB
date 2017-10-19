@@ -83,10 +83,12 @@ mongoModule.init = function (callback) {
 		reconnectTries: 3600,
 		reconnectInterval: 1000,
 		autoReconnect: true,
+		authSource: 'admin',
 	};
 
 	connOptions = _.merge(connOptions, nconf.get('mongo:options') || {});
 
+	console.log('connString############', connString)
 	mongoClient.connect(connString, connOptions, function (err, _db) {
 		if (err) {
 			winston.error('NodeBB could not connect to your Mongo database. Mongo returned the following error: ' + err.message);
